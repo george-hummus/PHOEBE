@@ -1,8 +1,8 @@
-####Within here lies code for testing a new WD model atmosphere (TMAP) to be 
-####implimented into the PHOEBE binary modelling software.
+#### Within here lies code for testing a new WD model atmosphere (TMAP) to be 
+#### implimented into the PHOEBE binary modelling software.
 
 
-#####Directories:
+##### Directories:
 
 - WD_models:
 	- Contains the .dat files for the model WDs, plus scripts to extract the data, 
