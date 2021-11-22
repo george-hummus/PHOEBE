@@ -1,0 +1,6 @@
+https://cdsarc.cds.unistra.fr/ftp/J/A+A/588/A25/models/0001_t03.dat
+https://cdsarc.cds.unistra.fr/ftp/J/A+A/588/A25/models/0010_t03.dat 
+https://cdsarc.cds.unistra.fr/ftp/J/A+A/588/A25/models/0010_tb2.dat 
+https://cdsarc.cds.unistra.fr/ftp/J/A+A/588/A25/models/0100_t03.dat 
+https://cdsarc.cds.unistra.fr/ftp/J/A+A/588/A25/models/0100_tb2.dat 
+https://cdsarc.cds.unistra.fr/ftp/J/A+A/588/A25/models/0200_t03.dat
