@@ -9,3 +9,8 @@
 	- Contains scripts for extracting the models created in the scripts within the WD_models directory. It then calculates their lightcurves at different inclinations and plots the results. Also compares the amplitude with eclisping model on and off, so if there is a difference you know that the model eclipses at this inclination. 
 
 
+##### Files:
+- useful_funcs:
+	- Contains useful functions that are imported and used within the other scripts, so make sure to have this in one directory higher when running any of the other code. 
+
+
