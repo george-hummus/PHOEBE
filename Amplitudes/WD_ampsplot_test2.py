@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import argparse 
 
 ### SYS ARGUMENTS
-parser = argparse.ArgumentParser(description = 'Creates a simple binary model of a WD and MS star using interpolated values from WD models in PHOEBE. Can specify the mass of the MS star, and where location of interpolated values.')
+parser = argparse.ArgumentParser(description = 'Plots the amplitudes (from "native" and "horizion only" esclipsing methods) and the difference between the two, for a WD MS binary lightcurve previously calculated using PHOEBE. Can specify which plots are required.')
 ## Adding arguments 
 parser.add_argument('path' , type = str, help = 'Path leading to directory containing .npy files to be plotted. Needs to end in "/"')
 parser.add_argument('plotAD' , type = int, help = 'Option to plot amplitude difference between "native" and "only horizon". Binary option.')

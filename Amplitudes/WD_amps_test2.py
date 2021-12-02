@@ -9,7 +9,7 @@ import os
 import argparse 
 
 ### SYS ARGUMENTS
-parser = argparse.ArgumentParser(description = 'Creates a simple binary model of a WD and MS star using interpoated values from WD models in PHOEBE. Can spefify the mass of the MS star, and where location of interpolated values.')
+parser = argparse.ArgumentParser(description = '''Imports simple binary model of a WD and MS star using interpoated values from WD models in PHOEBE. Then finds the amplitude of this model's light curve at different inclinations.''')
 ## Adding arguments 
 parser.add_argument('pth' , type = str, help = 'Path leading to directory containing .phoebe files containing the binary models of the WDs. Needs to end in "/"')
 args = parser.parse_args() #unpacking
