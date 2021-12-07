@@ -124,8 +124,10 @@ for i in logmsm:
 
         for k in incls:
             ## Set up inclination
-            incl = k
+            incl = float(k)
             b['incl@binary'].set_value(incl)
+
+            print(MS_mass, period, incl)
 
             ## Run Compute
             if b.run_checks().status != 'FAIL': #under the condition that the compute won't fail
@@ -167,7 +169,6 @@ for i in logmsm:
 
             outputs.append(cycle_out)
             cycles.append(1)
-            
 
 
 ### INFO FILE
