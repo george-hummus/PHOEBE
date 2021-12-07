@@ -22,11 +22,6 @@ parser.add_argument('--i_lims' , type = float, nargs='+', help = 'Sets inital an
 args = parser.parse_args()
 
 
-###CREATE DIR
-name = args.model[0:-4]
-path = funcs.mkdir('outputs/', name)
-
-
 ### LOAD IN ARRAYS
 ## Import Tmap arrays
 TMAP_varbs = np.load('TMAP_data/'+args.model)
@@ -47,7 +42,9 @@ age = input(str(ages))
 where_age = np.where(ages == float(age))[0]
 ## Varibles at this age
 logt, logg, mass = logts[where_age], loggs[where_age], masses[where_age]
+
 ## Abunadance for this model
+name = args.model[0:-4]
 where_abun = int(np.where(modelnames==name[0:-5])[0])
 abun = abuns[where_abun]
 
@@ -55,6 +52,10 @@ abun = abuns[where_abun]
 ### SET UP WD
 Teff = float((10**logt)) * u.K
 mass = float(mass) * u.solMass
+
+
+###CREATE DIR
+path = funcs.mkdir('outputs/', age +'yrs_'+name)
 
 
 ### MAKING INITAL PHOEBE MODEL
@@ -74,6 +75,10 @@ b.set_value('logg@primary', value= float(logg))
 #Teff
 b.set_value('primary@component@teff', value = Teff)
 
+#irradiation and gravity darkening fo WD to 1
+b['irrad_frac_refl_bol@primary'].set_value(1.0)
+b['gravb_bol@primary'].set_value(1.0)
+
 #abundance
 b['abun@primary'].set_value(abun)
 
@@ -86,7 +91,7 @@ b['passband'].set_value('SDSS:i')
 
 ## Save Model
 if args.save == True:
-	b.save('models/'+name+'.phoebe')
+	b.save(path+name+'.phoebe')
 
 
 #PARAMETERS TO CYCLE THRU
@@ -94,9 +99,11 @@ logmsm = np.linspace(np.log10(args.msm_lims[0]),np.log10(args.msm_lims[1]),int(a
 logp = np.linspace(np.log10(args.p_lims[0]),np.log10(args.p_lims[1]),int(args.p_lims[2])) #log periods
 incls = np.arange(args.i_lims[0],args.i_lims[1]+args.i_lims[2],int(args.i_lims[2])) #inclinations
 
-
+### EMPTY LISTS
 outputs = [] #empty list for outputs that will be written to csv file
-
+cycles = [] #stores element to count total number of cycles
+succs = [] #stores element to count total number of successes
+fails = [] #stores element to count total number of failures
 
 ##cycle through the different parameters
 for i in logmsm:
@@ -120,33 +127,70 @@ for i in logmsm:
             incl = k
             b['incl@binary'].set_value(incl)
 
-            print(b['sma@binary@component'])
-            print(b['requiv@secondary'])
-            print(b['requiv@primary'])
-
             ## Run Compute
-            #native
-            b.run_compute(model = 'n', eclipse_method = 'native', overwrite = True)
-            #only horizon
-            b.run_compute(model = 'oh', eclipse_method = 'only_horizon', overwrite = True)
+            if b.run_checks().status != 'FAIL': #under the condition that the compute won't fail
+                #native
+                try:
+                    b.run_compute(model = 'n', eclipse_method = 'native', overwrite = True)
 
-            ## Native Eclipse
-            n_f = b['lc01@n@fluxes'].value #fluxes
-            n_amp = np.max(n_f) - np.min(n_f) #calculates amplitude of lc
+                    #only horizon
+                    b.run_compute(model = 'oh', eclipse_method = 'only_horizon', overwrite = True)
 
-            ## No Eclipse
-            oh_f = b['lc01@oh@fluxes'].value #fluxes
-            oh_amp = np.max(oh_f) - np.min(oh_f) #calculates amplitude of lc
+                    ## Native Eclipse
+                    n_f = b['lc01@n@fluxes'].value #fluxes
+                    n_amp = np.max(n_f) - np.min(n_f) #calculates amplitude of lc
 
-            ampDiff = abs(n_amp - oh_amp) #difference in the amplitudes
-            if ampDiff > 0:
-                is_eclipse = True
+                    ## No Eclipse
+                    oh_f = b['lc01@oh@fluxes'].value #fluxes
+                    oh_amp = np.max(oh_f) - np.min(oh_f) #calculates amplitude of lc
+
+                    ampDiff = abs(n_amp - oh_amp) #difference in the amplitudes
+                    if ampDiff > 0:
+                        is_eclipse = True
+                    else:
+                        is_eclipse = False
+
+                    ## Saving out results to list, so can be saved as csv file
+                    cycle_out = [MS_mass, period, incl, n_amp, oh_amp, ampDiff,is_eclipse]
+
+                    succs.append(1)
+
+                except ValueError as error:
+                    print(error)
+                    cycle_out = [MS_mass, period, incl, False, False, False, False]
+
+                    fails.append(1)
+
             else:
-                is_eclipse = False
+                cycle_out = [MS_mass, period, incl, None, None, None, None]
+                fails.append(1)
 
-            ## Saving out results to list, so can be saved as csv file
-            cycle_out = [MS_mass, period, incl, n_amp, oh_amp, ampDiff,is_eclipse]
             outputs.append(cycle_out)
+            cycles.append(1)
+            
+
+
+### INFO FILE
+with open(path+'info.txt', 'w') as file1:
+    # Writing data to a file
+    file1.write("Information about model & results:\n")
+    file1.write("-Name: "+name+"\n")
+    file1.write("-Age: "+age+" yrs\n")
+    file1.write("-MS Star Mass Limits:\n")
+    file1.write("--Inital mass = "+str(args.msm_lims[0])+" SolMass\n")
+    file1.write("--Final mass = "+str(args.msm_lims[1])+" SolMass\n")
+    file1.write("--Number of samples = "+str(args.msm_lims[2])+"\n")
+    file1.write("-Period Limits:\n")
+    file1.write("--Inital period = "+str(args.p_lims[0])+" days\n")
+    file1.write("--Final period = "+str(args.p_lims[1])+" days\n")
+    file1.write("--Number of samples = "+str(args.p_lims[2])+"\n")
+    file1.write("-Inclination Limits:\n")
+    file1.write("--Inital inclination = "+str(args.i_lims[0])+" degs\n")
+    file1.write("--Final inclination = "+str(args.i_lims[1])+" degs\n")
+    file1.write("--Size between samples = "+str(args.i_lims[2])+" degs\n")
+    file1.write("-Number of cycles = "+str(len(cycles))+"\n")
+    file1.write("--of which successful = "+str(len(succs))+"\n")
+    file1.write("--of which failed = "+str(len(fails))+"\n")
 
 
 ### SAVE RESULTS

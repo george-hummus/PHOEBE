@@ -1,0 +1,17 @@
+MS Mass,Period,Inclination,Native Amplitude,Only-Horizon Amplitude,Amplitude Difference,Eclipsing?
+0.1 solMass,0.1 d,0.0,False,False,False,False
+0.1 solMass,0.1 d,30.0,False,False,False,False
+0.1 solMass,0.1 d,60.0,False,False,False,False
+0.1 solMass,0.1 d,90.0,False,False,False,False
+0.1 solMass,10.0 d,0.0,False,False,False,False
+0.1 solMass,10.0 d,30.0,False,False,False,False
+0.1 solMass,10.0 d,60.0,False,False,False,False
+0.1 solMass,10.0 d,90.0,False,False,False,False
+1.0 solMass,0.1 d,0.0,,,,
+1.0 solMass,0.1 d,30.0,,,,
+1.0 solMass,0.1 d,60.0,,,,
+1.0 solMass,0.1 d,90.0,,,,
+1.0 solMass,10.0 d,0.0,0.0,0.0,0.0,False
+1.0 solMass,10.0 d,30.0,0.3837334896741884,0.3837334896741884,0.0,False
+1.0 solMass,10.0 d,60.0,0.6564501504207845,0.6564501504207845,0.0,False
+1.0 solMass,10.0 d,90.0,1.7521009989715202,0.7539412625831725,0.9981597363883477,True
