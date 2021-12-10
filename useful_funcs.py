@@ -47,24 +47,48 @@ def MTR(M):
 
 
 ### MY FUNCTIONS
-import os 
+import os
 import glob
 
 def mkdir(path,dirname):
-    if os.path.isdir(path+dirname) == False: 
+    if os.path.isdir(path+dirname) == False:
         os.mkdir(path+dirname) #if no dir of same name it creates it
         new_path = path+dirname+'/'
     else:
         dir_names = glob.glob(path+dirname+'*') #looks for all dirs with same start put differnt end
-        if len(dir_names) == 1: 
+        if len(dir_names) == 1:
             os.mkdir(path+dirname+'1') #if only the original dir found then makes directory with 1 at end
             new_path = path+dirname+'1'+'/'
         else:
             lst_num = int(dir_names[-1][-1]) #if more than one with same start name then assumes parts after are numbers
             try:
-                os.mkdir(path+dirname+str(lst_num+1)) #so looks for the last number then creates dir with that number + 1 at end 
+                os.mkdir(path+dirname+str(lst_num+1)) #so looks for the last number then creates dir with that number + 1 at end
             except OSError as error:
-                print(error) 
+                print(error)
                 print('Try another directory name?')
             new_path = path+dirname+str(lst_num+1)+'/'
     return new_path
+
+import phoebe
+
+def amps(b):
+	b.run_compute(model = 'n', eclipse_method = 'native', overwrite = True)
+
+	#only horizon
+	b.run_compute(model = 'oh', eclipse_method = 'only_horizon', overwrite = True)
+
+	## Native Eclipse
+	n_f = b['lc01@n@fluxes'].value #fluxes
+	n_amp = -2.5*np.log10(n_f[1]/n_f[0]) #calculates amplitude of lc in  magnitudes
+
+	## No Eclipse
+	oh_f = b['lc01@oh@fluxes'].value #fluxes
+	oh_amp = -2.5*np.log10(oh_f[1]/oh_f[0]) #calculates amplitude of lc in  magnitudes
+
+	ampDiff = abs(n_amp - oh_amp) #difference in the amplitudes
+	if ampDiff > 0:
+		is_eclipse = True
+	else:
+		is_eclipse = False
+
+	return n_amp, oh_amp, ampDiff, is_eclipse
