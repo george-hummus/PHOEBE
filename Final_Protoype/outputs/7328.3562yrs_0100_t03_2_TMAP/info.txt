@@ -1,0 +1,22 @@
+Information about model & results:
+-Name: 0100_t03_2_TMAP
+-Age: 7328.3562 yrs
+-MS Star Mass Limits:
+--Inital mass = 0.1 SolMass
+--Final mass = 1 SolMass
+--Number of samples = 20
+-Period Limits:
+--Inital period = 0.1 days
+--Final period = 10 days
+--Number of samples = 20
+-Inclination Limits:
+--Inital inclination = 0 degs
+--Final inclination = 90 degs
+--Size between samples = 5 degs
+-Number of cycles = 7600
+--of which successful = 3173 (41.75%)
+---with ck2004 atmosphere = 2451 (77.24550898203593%)
+---with phoenix atmosphere = 722 (22.75449101796407%)
+--of which successful = 3173 (41.75%)
+--of which failed = 4427 (58.25%)
+-This took 9275.149833429 seconds
