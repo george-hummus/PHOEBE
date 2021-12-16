@@ -22,7 +22,7 @@
 	- 7600 models (i.e., default settings)
 	- Made with v3
 
-- 7404.1777yrs_0100_t03_2_TMAP2
+- 7404.1777yrs_0100_t03_2_TMAP
 	- 100 models
 	- made with v3
 
