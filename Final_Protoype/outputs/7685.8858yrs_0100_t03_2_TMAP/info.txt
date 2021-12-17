@@ -1,0 +1,19 @@
+Information about model & results:
+-Name: 0100_t03_2_TMAP
+-Age: 7685.8858 yrs
+-MS Star Mass Limits:
+--Inital mass = 0.1 SolMass
+--Final mass = 1.0 SolMass
+--Number of samples = 5.0
+-Period Limits:
+--Inital period = 0.1 days
+--Final period = 10.0 days
+--Number of samples = 5.0
+-Inclination Limits:
+--Inital inclination = 0.0 degs
+--Final inclination = 90.0 degs
+--Size between samples = 15.0 degs
+-Number of cycles = 175
+--of which successful = 154 (88.0%)
+--of which failed = 21 (12.0%)
+-This took 555.3379020599968 seconds
