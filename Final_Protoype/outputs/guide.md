@@ -4,9 +4,10 @@
 ##### Key to Versions
 
 - v1: Calculates the amplitude in flux units and gives no percentages or run times in info.txt file.
+- v1.1: same as v1 but with parallisation to speed up proccess courtesy of Paige Yarker.
 - v2: Calculates amplitude in magnitude units and gives percentages and run times in info.txt file.
 - v3 (or new_prototype): Makes all results in CSV output file floats only, fixes issue with going over 90 deg inclination, and the Phoenix atmosphere now works as we use ‘Johnson:I’ passband.
-- v4 (or BB_prototype): ck2004 and phoenix atms are replaced with a Black Body atmosphere with phoenix limb darkening. Also mass and period are spaced logarithmically now using np.logspace()
+- v4 (or BB_prototype): ck2004 and phoenix atms are replaced with a Black Body atmosphere with phoenix limb darkening. Also mass and period are spaced logarithmically now using np.logspace().
 
 
 
@@ -30,6 +31,10 @@
 - 7685.8858yrs_0100_t03_2_TMAP
 	- 175 models
 	- made with v4
+
+- 8573.2837yrs_0100_t03_2_TMAP
+	- 100 models
+	- made with v1.1
 
 
 
