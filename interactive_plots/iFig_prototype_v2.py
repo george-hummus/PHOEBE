@@ -1,7 +1,7 @@
 #imports
 import numpy as np
 from bokeh.layouts import column, row
-from bokeh.models import Slider, Select, ColumnDataSource, RadioButtonGroup
+from bokeh.models import Slider, Select, ColumnDataSource, RadioButtonGroup, Div
 from bokeh.plotting import figure, show
 from bokeh.io import curdoc
 
@@ -40,8 +40,10 @@ period_menu = list(np.array(ps, dtype=str))
 incl_menu = list(np.array(ics, dtype=str))
 
 #set up axes widgets
+xtitle = Div(text="Select x-axis varible:")
 xaxis = RadioButtonGroup(labels=x_vars, active = 2)
 #select which varible you want on x-axis; chocies are 'mass', 'period', 'inclination'
+ytitle = Div(text="Select y-axis varible:")
 yaxis = RadioButtonGroup(labels=y_vars, active = 0)
 #select which varible you want on y-axis
 #chocies are 'native amplitude', 'only_horizon amplitude', 'difference in amplitude'
@@ -64,7 +66,7 @@ def controls():
         free_vars = column(m2pick, p2pick)
         #inclination is varrying so need to fix mass and period
 
-    widgets = column(xaxis,yaxis,free_vars)
+    widgets = column(xtitle,xaxis,ytitle,yaxis,free_vars)
 
     return widgets
 
@@ -98,37 +100,33 @@ def plotting():
     #updates the new varibles
     mass, period, incl = new_vars()
 
+    p = figure(width=400, height=400 , tools = 'pan,wheel_zoom,reset,save,')
+
     #labels depend on what is fixed
     if xaxis.active == 0:
-        lab = 'Period = '+str(round(period,4))+' days'+'\n'+'Inclination = '+str(round(incl,4))+' degs'
-        xlab = 'Mass of MS Star (Solar Masses)'
+        p.title.text = f'Period = {round(period,4)} days'+'\n'+f'Inclination = {round(incl,4)} degs'
+        p.xaxis.axis_label = r"$$\mathrm{Mass \: of \: MS \: Star \:} (M_{\odot})$$"
     if xaxis.active == 1:
-        lab = 'mass = '+str(round(mass,4))+' solMass'+'\n'+ 'Inclination = '+str(round(incl,4))+' degs'
-        xlab = 'Period of Binary (days)'
+        p.title.text = f'Mass = {round(mass,4)} Solar Masses'+'\n'+ f'Inclination = {round(incl,4)} degs'
+        p.xaxis.axis_label = r'$$\mathrm{Period \: of \: Binary \: (days)}$$'
     if xaxis.active == 2:
-        lab = 'Mass = '+str(round(mass,4))+' solMass'+'\n'+ 'Period = '+str(round(period,4))+' days'
-        xlab = 'Inclination of Binary (degrees)'
+        p.title.text = f'Mass = {round(mass,4)} Solar Masses'+'\n'+ f'Period = {round(period,4)} days'
+        p.xaxis.axis_label = r"$$\mathrm{Inclination \: of \: Binary \:} (^{o})$$"
 
     #extracts data depending on what is on y-axis
     if yaxis.active == 0: #i.e., native amplitude
-
         x, y = extract(natives, mass, period, incl)
-        ylab = 'Native Amplitude (mag)'
+        p.yaxis.axis_label = r'$$\mathrm{Native \: Amplitude \: (mag)}$$'
     if yaxis.active == 1: #i.e., only_horizon amplitude
         x, y = extract(ohs, mass, period, incl)
-        ylab = 'Only-Horizon Amplitude (mag)'
+        p.yaxis.axis_label = r'$$\mathrm{Only-Horizon \: Amplitude \: (mag)}$$'
     if yaxis.active == 2: # i.e., difference in amplitude
         x, y = extract(diffs, mass, period, incl)
-        ylab = 'Amplitude Difference (mag)'
+        p.yaxis.axis_label = r'$$\mathrm{Amplitude \: Difference \: (mag)}$$'
 
-
-    p = figure(width=400, height=400)
     r = p.scatter(x, y, marker = 'circle', size=10, alpha=0.5)
 
-    p.title.text = lab
-
-    p.xaxis.axis_label = xlab
-    p.yaxis.axis_label = ylab
+    p.title.text_font_size = "20px"
 
     return p
 
