@@ -109,8 +109,8 @@ fig.update_layout(
     #makes first mass the title on start up, as that is the one shown (otherwise no title)
 
 #configuring the axes labels
-fig['layout']['scene']['xaxis']['title']='Inclination (degs)'
-fig['layout']['scene']['yaxis']['title']='Period (days)'
+fig['layout']['scene']['xaxis']['title']='Period (days)'
+fig['layout']['scene']['yaxis']['title']='Inclination (degs)'
 fig['layout']['scene']['zaxis']['title']='Amplitude (mag)'
 
 #shows graph and saves it in HTML format
