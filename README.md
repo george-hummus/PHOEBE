@@ -1,4 +1,4 @@
-#### Within here lies code for testing a new WD model atmosphere (TMAP) to be implimented into the PHOEBE binary modelling software.
+#### Within here lies the Python code for testing a new WD model atmosphere (TMAP) in the PHOEBE binary modelling software.
 
 
 ##### Directories:
@@ -8,10 +8,9 @@
 - Amplitudes
 	- Contains scripts for extracting the models created in the scripts within the WD_models directory. It then calculates their lightcurves at different inclinations and plots the results. Also compares the amplitude with eclisping model on and off, so if there is a difference you know that the model eclipses at this inclination. 
 - Final_Prototype
-	- Contains the script which is the final prototype. It builds a PHOEBE mode binary from a specified WD model (within TMAP limits) and then loops through a range of different parameters and saves out the amplitudes of these lightcurves. Directory also contains the abundances and TMAP data saved in .npz format, as well as the outputs from the prototype script.
+	- Contains the script which is the final prototype. It builds a PHOEBE binary star model from a specified WD model (within TMAP limits) and then loops through a range of different parameters and saves out the amplitudes of these lightcurves. Directory also contains the abundances and TMAP data saved in .npz format, as well as the outputs from the prototype script.
 - interactive_plots
-	- Contains scripts that create interactive plots from the results prouduced from running all the models. There is an example using `bokeh` where you can specify what to be plotted on the x or y axes, and then pick the values of the free varibles (v1 doesn't chnage on the fly but v2 uses a bokeh server to change on the fly). The other examples use `plotly` and can make interactive 3D plots which can be saved as HTML files and viewed on a browser. The first creates a grid 9 3D plots at different masses, and the second uses a dropdown menu where you can select the mass to be plotted.
-
+	- Contains scripts that create interactive plots from the results prouduced from running all the models. There is an example using `bokeh` where you can specify what to be plotted on the x or y axes, and then pick the values of the free varibles (v1 doesn't chnage on the fly but v2 uses a bokeh server to change on the fly). The other examples use `plotly` and can make interactive 3D plots which can be saved as HTML files and viewed on a browser. The first creates a grid 9 3D plots at different masses, and the second uses a dropdown menu where you can select the mass to be plotted. The third plots a surface instead of a 3D scatter plot, band you can view the interactive version [here](https://htmlpreview.github.io/?https://github.com/george-hummus/PHOEBE/blob/main/interactive_plots/plotly_surface.html)
 
 ##### Files:
 - useful_funcs:
