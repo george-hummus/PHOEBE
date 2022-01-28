@@ -1,5 +1,5 @@
 ### Here is an image of the surface plot of the amplitudes made in `plotly`:
-![example](plotly_surafce.png)
+![example](plotly_surface.png)
 #### Launch interactive version [here](https://htmlpreview.github.io/?https://github.com/george-hummus/PHOEBE/blob/main/interactive_plots/plotly_surface.html) (made with plotly_surface.py)
 
 ### Here is a still of the `plotly` interactive plot with drop-down menu:
@@ -12,4 +12,4 @@
 
 ### Here is an image of the interface used to interact with the plot produced with v2:
 ![example](v2_example.png)
-#### (iFig_prototype_v2.py)
+#### (made with iFig_prototype_v2.py)
