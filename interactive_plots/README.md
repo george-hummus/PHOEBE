@@ -1,5 +1,3 @@
-## WARNING - `plotly` surface plots are incorrect and need to be de-bugged, so don't take the values in these interactive plots as true.
-
 ### Here is an image of the surface plot of the amplitudes made in `plotly`:
 ![example](plotly_surface.png)
 #### Launch interactive version [here](https://htmlpreview.github.io/?https://github.com/george-hummus/PHOEBE/blob/main/interactive_plots/plotly_surface.html) (made with plotly_surface.py)

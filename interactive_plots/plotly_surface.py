@@ -69,7 +69,7 @@ for n in range(20):
     distinct_masses.append(m) #adds mass to list so can use it in title
 
     fig.add_trace( #surface constructed from points
-    go.Mesh3d(x=p, y=ic, z=a, colorscale = [[0.0, 'orange'],[0.1,'blue'],[0.2,'indigo']],
+    go.Mesh3d(x=p, y=ic, z=a, colorscale = "Portland",
               intensity=a, showscale=False,
               hoverinfo='skip', visible = is_vis[n]
              ))
@@ -109,7 +109,7 @@ buts = []
 for i in range(20):
     k = i*3
     vis = np.array(False*np.ones(61),dtype=bool) #61 and shifted indices so plane is always visible
-    vis[0], vis[i+1], vis[i+2], vis[i+3] = True, True, True, True #makes 1st and 3 adjacent indices True so plane,surface, non-eclipsing and eclipsing data for the mass are shown when the option is selected
+    vis[0], vis[k+1], vis[k+2], vis[k+3] = True, True, True, True #makes 1st and 3 adjacent indices True so plane,surface, non-eclipsing and eclipsing data for the mass are shown when the option is selected
 
     but = dict(label = str(distinct_masses[i]),
                   method = 'update',
