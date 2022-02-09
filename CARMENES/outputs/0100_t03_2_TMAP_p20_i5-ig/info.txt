@@ -1,0 +1,14 @@
+Information about model & results:
+-MS Star Mass Limits:
+-Period Limits:
+--Inital period = 0.1 days
+--Final period = 10 days
+--Number of samples = 20
+-Inclination Limits:
+--Inital inclination = 0 degs
+--Final inclination = 90 degs
+--Size between samples = 5 degs
+-Number of cycles = 5700
+--of which successful = 5301 (93.0%)
+--of which failed = 399 (7.000000000000001%)
+-Process took 14709.756259333 seconds
