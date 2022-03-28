@@ -126,7 +126,8 @@ for i in range(15): #15 masses for CARMENS in extended version
 
 fig.update_layout(
     updatemenus=[go.layout.Updatemenu(active=0,buttons=list(buts))], #adds dropdown menu
-    title={'text':f'{sp_types[0]} Secondary Star (Mass = {distinct_masses[0]} solMass)'})
+    title={'text':f'{sp_types[0]} Secondary Star (Mass = {distinct_masses[0]} solMass)'},
+    legend=dict(yanchor="top", y=1.05,xanchor="center",x=0.5)) #moves legend below dropdown
     #makes first mass the title on start up, as that is the one shown (otherwise no title)
 
 #configuring the axes labels
