@@ -1,5 +1,7 @@
 #### Within here lies the Python code for testing a new WD model atmosphere (TMAP) in the PHOEBE binary modelling software.
 
+##### Research note published from the work in this repository: [On the Detectability of Post-common-envelope Binary Central Stars of Planetary Nebulae](https://doi.org/10.3847/2515-5172/ac61e2)
+![paper](paper.png)
 
 ##### Directories:
 
